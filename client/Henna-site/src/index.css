@@ -1,0 +1,8 @@
+
+@import "tailwindcss";
+html {
+  scroll-behavior: smooth;
+}
+.icon{
+  width: 28%;
+}
