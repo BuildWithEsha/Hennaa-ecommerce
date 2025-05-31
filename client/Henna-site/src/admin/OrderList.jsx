@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import { FaChevronDown, FaChevronUp, FaTrashAlt } from 'react-icons/fa';
 
 export default function OrderList() {
   const [orders, setOrders] = useState([]);
@@ -40,6 +40,13 @@ export default function OrderList() {
     );
   }
 
+  // New: Remove order locally by filtering it out
+  function deleteOrder(id) {
+    setOrders(prev => prev.filter(order => order._id !== id));
+    // Also remove from expandedOrderIds if expanded
+    setExpandedOrderIds(prev => prev.filter(orderId => orderId !== id));
+  }
+
   const toBeDelivered = orders.filter((o) => !o.delivered);
   const delivered = orders.filter((o) => o.delivered);
 
@@ -75,13 +82,25 @@ export default function OrderList() {
             <p className="text-[#854F6C]"><strong>Products:</strong> {order.cartItems.map(p => p.title).join(', ')}</p>
             {isExpanded && renderOrderDetails(order)}
           </div>
-          <button
-            onClick={() => toggleDetails(order._id)}
-            className="text-[#854F6C] hover:text-black"
-            title="Toggle Details"
-          >
-            {isExpanded ? <FaChevronUp /> : <FaChevronDown />}
-          </button>
+          <div className="flex flex-col items-center space-y-1">
+            <button
+              onClick={() => toggleDetails(order._id)}
+              className="text-[#854F6C] hover:text-black"
+              title="Toggle Details"
+            >
+              {isExpanded ? <FaChevronUp /> : <FaChevronDown />}
+            </button>
+            {/* Delete button */}
+            <button
+              onClick={() => deleteOrder(order._id)}
+              className="text-[#854F6C] hover:text-red-600"
+              title="Delete Order"
+              style={{ fontSize: '0.75rem', lineHeight: 1 }}
+              aria-label="Delete order"
+            >
+              <FaTrashAlt />
+            </button>
+          </div>
         </div>
         <button
           onClick={() => toggleDelivered(order._id, order.delivered)}
