@@ -40,10 +40,8 @@ export default function OrderList() {
     );
   }
 
-  // New: Remove order locally by filtering it out
   function deleteOrder(id) {
     setOrders(prev => prev.filter(order => order._id !== id));
-    // Also remove from expandedOrderIds if expanded
     setExpandedOrderIds(prev => prev.filter(orderId => orderId !== id));
   }
 
@@ -90,7 +88,6 @@ export default function OrderList() {
             >
               {isExpanded ? <FaChevronUp /> : <FaChevronDown />}
             </button>
-            {/* Delete button */}
             <button
               onClick={() => deleteOrder(order._id)}
               className="text-[#854F6C] hover:text-red-600"

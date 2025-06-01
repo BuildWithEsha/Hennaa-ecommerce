@@ -36,7 +36,6 @@ export default function Cart() {
           </p>
         ) : (
           <>
-            {/* TABLE - visible md and up */}
             <div className="hidden md:block overflow-x-auto" data-aos="fade-up">
               <table className="w-full min-w-[600px] border-collapse">
                 <thead>
@@ -98,7 +97,6 @@ export default function Cart() {
               </table>
             </div>
 
-            {/* VERTICAL LIST - visible on mobile (sm and below) */}
             <div className="md:hidden flex flex-col gap-6" data-aos="fade-up">
               {cartItems.map((item) => (
                 <div

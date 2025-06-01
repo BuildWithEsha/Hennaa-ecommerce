@@ -52,7 +52,6 @@ export default function Checkout() {
       </h1>
 
       <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto mt-10">
-        {/* Order Summary */}
         <div className="text-[#5a6341] space-y-4 self-start w-full">
           <h2 className="text-2xl font-bold mb-2">Order Summary</h2>
 
@@ -90,7 +89,6 @@ export default function Checkout() {
           </div>
         </div>
 
-        {/* Scrollable Form */}
         <div className="max-h-[65vh] overflow-y-auto bg-white p-6 rounded-lg shadow-xl shadow-[#5a6341] border border-[#6f775b] w-full">
           <form onSubmit={handleSubmit} className="space-y-5 text-[#5a6341]">
             {[
