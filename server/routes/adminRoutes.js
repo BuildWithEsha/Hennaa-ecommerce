@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 
 const router = express.Router();
 
-const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret_here'; // Put a strong secret in env
+const JWT_SECRET = process.env.JWT_SECRET
 
 router.post('/create-admin', async (req, res) => {
   try {
@@ -33,7 +33,6 @@ router.post('/login', async (req, res) => {
     const isMatch = await admin.comparePassword(password);
     if (!isMatch) return res.status(401).json({ message: 'Invalid username or password' });
 
-    // Create JWT token with admin id and username
     const token = jwt.sign(
       { id: admin._id, username: admin.username },
       JWT_SECRET,
