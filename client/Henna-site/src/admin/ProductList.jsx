@@ -18,7 +18,10 @@ export default function ProductList() {
     if (!window.confirm('Are you sure you want to delete this product?')) return;
 
     try {
-      const res = await fetch(`http://localhost:5000/api/products/${id}`, { method: 'DELETE' });
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/products/${id}`, {
+        method: 'DELETE',
+      });
+
       console.log('Delete response status:', res.status);
       if (res.ok) {
         setProducts(products.filter(p => p._id !== id));

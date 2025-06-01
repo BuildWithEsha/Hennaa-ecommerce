@@ -16,7 +16,7 @@ export default function AdminLogin() {
     setError('');
 
     try {
-      const res = await axios.post('http://localhost:5000/api/admin/login', {
+      const response = await fetch('https://hennaa-ecommerce-production.up.railway.app/api/admin/login', {
         username,
         password,
       });
