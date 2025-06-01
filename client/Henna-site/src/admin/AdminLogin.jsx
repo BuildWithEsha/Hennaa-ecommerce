@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from './AuthContext';  
+import { useAuth } from './AuthContext';
 
 export default function AdminLogin() {
   const [username, setUsername] = useState('');
@@ -8,7 +8,7 @@ export default function AdminLogin() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const { setIsAuthenticated } = useAuth();  
+  const { setIsAuthenticated } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,13 +26,8 @@ export default function AdminLogin() {
       const data = await response.json();
 
       if (response.ok && data.token) {
-        // Store token in localStorage
         localStorage.setItem('adminToken', data.token);
-
-        // Update auth context
         setIsAuthenticated(true);
-
-        // Redirect to dashboard
         navigate('/admin/dashboard');
       } else {
         setError(data.message || 'Invalid login credentials');
@@ -44,31 +39,24 @@ export default function AdminLogin() {
 
   return (
     <div
-      className="min-h-screen flex flex-col items-center pt-20 px-6"
+      className="min-h-screen flex flex-col items-center justify-start pt-16 px-4 sm:px-6 lg:px-8"
       style={{
         background: 'linear-gradient(135deg, #FBE4DB, #DFB6B2, #854F6C)',
       }}
     >
       <h1
-        className="text-center font-extrabold"
-        style={{
-          color: '#854F6C',
-          fontSize: '3rem',
-          marginBottom: '3rem',
-          letterSpacing: '0.1em',
-          textShadow: '1px 1px 4px rgba(0,0,0,0.1)',
-          maxWidth: '600px',
-          width: '100%',
-        }}
+        className="text-[#854F6C] text-3xl sm:text-4xl font-extrabold mb-10 text-center tracking-wide drop-shadow-sm max-w-lg w-full"
       >
         Admin Dashboard
       </h1>
 
       <form
         onSubmit={handleSubmit}
-        className="bg-[#FBE4DB] p-10 rounded-2xl shadow-xl w-full max-w-2xl"
+        className="bg-[#FBE4DB] w-full max-w-lg p-6 sm:p-8 lg:p-10 rounded-2xl shadow-xl"
       >
-        <h2 className="text-3xl font-bold mb-8 text-center text-[#854F6C]">Admin Login</h2>
+        <h2 className="text-2xl sm:text-3xl font-bold mb-8 text-center text-[#854F6C]">
+          Admin Login
+        </h2>
 
         <input
           type="text"
@@ -88,11 +76,13 @@ export default function AdminLogin() {
           required
         />
 
-        {error && <p className="text-red-600 text-sm mb-5 text-center">{error}</p>}
+        {error && (
+          <p className="text-red-600 text-sm mb-5 text-center">{error}</p>
+        )}
 
         <button
           type="submit"
-          className="w-50 mx-auto block bg-[#854F6C] hover:bg-[#6b3c55] text-white font-semibold py-4 rounded-full transition-all duration-300 shadow-md"
+          className="w-full sm:w-auto px-6 py-4 bg-[#854F6C] hover:bg-[#6b3c55] text-white font-semibold rounded-full transition-all duration-300 shadow-md mx-auto block"
         >
           Login
         </button>

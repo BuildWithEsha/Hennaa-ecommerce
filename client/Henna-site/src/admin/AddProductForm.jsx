@@ -28,51 +28,55 @@ export default function AddProductForm() {
   };
 
   return (
-    <div
-      className="min-h-screen flex items-start justify-center pt-20 p-6"
-    >
+    <div className="min-h-screen flex items-start justify-center pt-16 px-4 sm:px-6 lg:px-8 bg-transparent">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-2xl bg-[#FBE4DB] p-10 rounded-2xl shadow-xl"
+        className="w-full max-w-2xl bg-[#FBE4DB] p-6 sm:p-10 rounded-2xl shadow-xl"
       >
-        <h3 className="text-3xl font-bold mb-8 text-center text-[#854F6C]">Add New Product</h3>
+        <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-8 text-center text-[#854F6C]">
+          Add New Product
+        </h3>
 
-        <input
-          type="text"
-          placeholder="Product Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
-          className="w-full mb-5 p-3 border border-[#DFB6B2] rounded-xl bg-white placeholder-[#854F6C] text-[#854F6C] focus:outline-none focus:ring-2 focus:ring-[#DFB6B2]"
-        />
+        <div className="space-y-6">
+          <input
+            type="text"
+            placeholder="Product Title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
+            className="w-full p-3 sm:p-4 border border-[#DFB6B2] rounded-xl bg-white placeholder-[#854F6C] text-[#854F6C] focus:outline-none focus:ring-2 focus:ring-[#DFB6B2]"
+          />
 
-        <input
-          type="number"
-          placeholder="Price"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-          required
-          className="w-full mb-5 p-3 border border-[#DFB6B2] rounded-xl bg-white placeholder-[#854F6C] text-[#854F6C] focus:outline-none focus:ring-2 focus:ring-[#DFB6B2]"
-        />
+          <input
+            type="number"
+            placeholder="Price"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+            required
+            className="w-full p-3 sm:p-4 border border-[#DFB6B2] rounded-xl bg-white placeholder-[#854F6C] text-[#854F6C] focus:outline-none focus:ring-2 focus:ring-[#DFB6B2]"
+          />
 
-        <input
-          type="text"
-          placeholder="Image URL"
-          value={image}
-          onChange={(e) => setImage(e.target.value)}
-          required
-          className="w-full mb-8 p-3 border border-[#DFB6B2] rounded-xl bg-white placeholder-[#854F6C] text-[#854F6C] focus:outline-none focus:ring-2 focus:ring-[#DFB6B2]"
-        />
+          <input
+            type="text"
+            placeholder="Image URL"
+            value={image}
+            onChange={(e) => setImage(e.target.value)}
+            required
+            className="w-full p-3 sm:p-4 border border-[#DFB6B2] rounded-xl bg-white placeholder-[#854F6C] text-[#854F6C] focus:outline-none focus:ring-2 focus:ring-[#DFB6B2]"
+          />
+        </div>
 
         <button
           type="submit"
-          className="w-50 mx-auto block bg-[#854F6C] hover:bg-[#6b3c55] text-white font-semibold py-4 rounded-full transition-all duration-300 shadow-md"
+          className="mt-8 w-full sm:w-auto px-6 py-4 bg-[#854F6C] hover:bg-[#6b3c55] text-white font-semibold rounded-full transition-all duration-300 shadow-md block mx-auto text-center"
         >
           Add Product
         </button>
 
         {message && (
-          <p className="mt-10 text-center text-base text-[#854F6C] font-medium">{message}</p>
+          <p className="mt-8 text-center text-base sm:text-lg text-[#854F6C] font-medium">
+            {message}
+          </p>
         )}
       </form>
     </div>

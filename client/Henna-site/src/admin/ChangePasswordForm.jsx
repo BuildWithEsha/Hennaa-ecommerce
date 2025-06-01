@@ -48,52 +48,54 @@ export default function ChangePasswordForm() {
   }
 
   return (
-    <div className="min-h-screen flex items-start justify-center pt-20 p-6 ">
+    <div className="min-h-screen flex items-start justify-center pt-16 px-4 sm:px-6 lg:px-8 bg-transparent">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-2xl bg-[#FBE4DB] p-10 rounded-2xl shadow-xl"
+        className="w-full max-w-2xl bg-[#FBE4DB] p-6 sm:p-8 lg:p-10 rounded-2xl shadow-xl"
       >
-        <h3 className="text-3xl font-bold mb-8 text-center text-[#854F6C]">
+        <h3 className="text-2xl sm:text-3xl font-bold mb-8 text-center text-[#854F6C]">
           Change Password
         </h3>
 
         {error && (
-          <p className="mb-4 text-red-600 text-sm text-center font-medium">{error}</p>
+          <p className="mb-4 text-red-600 text-sm sm:text-base text-center font-medium">{error}</p>
         )}
         {success && (
-          <p className="mb-4 text-green-600 text-sm text-center font-medium">{success}</p>
+          <p className="mb-4 text-green-600 text-sm sm:text-base text-center font-medium">{success}</p>
         )}
 
-        <input
-          type="password"
-          placeholder="Current Password"
-          value={currentPassword}
-          onChange={(e) => setCurrentPassword(e.target.value)}
-          required
-          className="w-full mb-5 p-3 border border-[#DFB6B2] rounded-xl bg-white placeholder-[#854F6C] text-[#854F6C] focus:outline-none focus:ring-2 focus:ring-[#DFB6B2]"
-        />
+        <div className="space-y-6">
+          <input
+            type="password"
+            placeholder="Current Password"
+            value={currentPassword}
+            onChange={(e) => setCurrentPassword(e.target.value)}
+            required
+            className="w-full p-3 sm:p-4 border border-[#DFB6B2] rounded-xl bg-white placeholder-[#854F6C] text-[#854F6C] focus:outline-none focus:ring-2 focus:ring-[#DFB6B2]"
+          />
 
-        <input
-          type="password"
-          placeholder="New Password"
-          value={newPassword}
-          onChange={(e) => setNewPassword(e.target.value)}
-          required
-          className="w-full mb-5 p-3 border border-[#DFB6B2] rounded-xl bg-white placeholder-[#854F6C] text-[#854F6C] focus:outline-none focus:ring-2 focus:ring-[#DFB6B2]"
-        />
+          <input
+            type="password"
+            placeholder="New Password"
+            value={newPassword}
+            onChange={(e) => setNewPassword(e.target.value)}
+            required
+            className="w-full p-3 sm:p-4 border border-[#DFB6B2] rounded-xl bg-white placeholder-[#854F6C] text-[#854F6C] focus:outline-none focus:ring-2 focus:ring-[#DFB6B2]"
+          />
 
-        <input
-          type="password"
-          placeholder="Confirm New Password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          required
-          className="w-full mb-8 p-3 border border-[#DFB6B2] rounded-xl bg-white placeholder-[#854F6C] text-[#854F6C] focus:outline-none focus:ring-2 focus:ring-[#DFB6B2]"
-        />
+          <input
+            type="password"
+            placeholder="Confirm New Password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            required
+            className="w-full p-3 sm:p-4 border border-[#DFB6B2] rounded-xl bg-white placeholder-[#854F6C] text-[#854F6C] focus:outline-none focus:ring-2 focus:ring-[#DFB6B2]"
+          />
+        </div>
 
         <button
           type="submit"
-          className="w-50 mx-auto block bg-[#854F6C] hover:bg-[#6b3c55] text-white font-semibold py-4 rounded-full transition-all duration-300 shadow-md"
+          className="mt-8 w-full sm:w-auto px-6 py-4 bg-[#854F6C] hover:bg-[#6b3c55] text-white font-semibold rounded-full transition-all duration-300 shadow-md block mx-auto"
         >
           Update Password
         </button>

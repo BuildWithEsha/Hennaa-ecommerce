@@ -54,7 +54,7 @@ export default function Products() {
     }
 
     return (
-      <div className="flex justify-center items-center gap-2 mt-8">
+      <div className="flex justify-center items-center gap-2 mt-8 flex-wrap">
         <button
           onClick={() => goToPage(currentPage - 1)}
           disabled={currentPage === 1}
@@ -91,18 +91,18 @@ export default function Products() {
       </div>
     );
   };
-  
+
   const addToCart = (product) => {
     addItem(product);
     navigate("/cart");
   };
 
   return (
-    <div className="bg-[#e6f7e2] min-h-screen px-10 md:px-20 py-3 flex flex-col scroll-smooth">
+    <div className="bg-[#e6f7e2] min-h-screen px-4 sm:px-10 md:px-20 py-3 flex flex-col scroll-smooth">
       <Header />
-      <main className="flex-grow p-12">
+      <main className="flex-grow p-6 sm:p-12">
         <h2
-          className="text-2xl font-semibold text-center ml-28 mb-18"
+          className="text-xl sm:text-2xl font-semibold text-center mb-6 sm:mb-8"
           data-aos="fade-down"
         >
           Our Products
@@ -111,24 +111,23 @@ export default function Products() {
         {loading ? (
           <p className="text-center">Loading products...</p>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 max-w-[1200px] mx-auto">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-[1200px] mx-auto">
             {currentProducts.map((product) => (
               <div
                 key={product._id}
-                className="bg-[#bfc79f] p-8 rounded-md text-center flex flex-col justify-between"
+                className="bg-[#bfc79f] p-4 sm:p-6 rounded-md text-center flex flex-col justify-between min-h-[200px]"
                 data-aos="fade-up"
                 data-aos-delay={parseInt(product._id, 10) || 0}
-                style={{ minHeight: "280px" }}
               >
                 <img
                   src={product.image}
                   alt={product.title}
-                  className="mb-4 mx-auto max-h-40 object-contain"
+                  className="mb-3 sm:mb-4 mx-auto max-h-28 sm:max-h-32 object-contain"
                 />
-                <h3 className="font-semibold mb-2">{product.title}</h3>
-                <p className="text-lg font-medium mb-4">Price: {product.price}</p>
+                <h3 className="font-semibold mb-1 text-sm sm:text-base truncate">{product.title}</h3>
+                <p className="text-md sm:text-lg font-medium mb-3">Price: {product.price}</p>
                 <button
-                  className="bg-[#a2ae73] hover:bg-[#89935f] text-white px-4 py-2 rounded mb-4"
+                  className="bg-[#a2ae73] hover:bg-[#89935f] text-white px-3 py-2 rounded text-sm sm:text-base"
                   onClick={() => addToCart(product)}
                 >
                   Add to cart
