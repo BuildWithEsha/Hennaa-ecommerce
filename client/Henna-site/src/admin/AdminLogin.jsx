@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { useAuth } from './AuthContext';  
 
 export default function AdminLogin() {
@@ -16,22 +15,30 @@ export default function AdminLogin() {
     setError('');
 
     try {
-      const response = await fetch('https://hennaa-ecommerce-production.up.railway.app/api/admin/login', {
-        username,
-        password,
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
       });
 
-      if (res.data.token) {
-        // Store token for authenticated requests
-        localStorage.setItem('adminToken', res.data.token);
+      const data = await response.json();
 
-        setIsAuthenticated(true);       
-        navigate('/admin/dashboard');   
+      if (response.ok && data.token) {
+        // Store token in localStorage
+        localStorage.setItem('adminToken', data.token);
+
+        // Update auth context
+        setIsAuthenticated(true);
+
+        // Redirect to dashboard
+        navigate('/admin/dashboard');
       } else {
-        setError(res.data.message || 'Invalid login credentials');
+        setError(data.message || 'Invalid login credentials');
       }
     } catch (err) {
-      setError(err.response?.data?.message || 'Login failed');
+      setError('Login failed. Please try again.');
     }
   };
 
