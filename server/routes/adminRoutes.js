@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 
 const router = express.Router();
 
-const JWT_SECRET = process.env.JWT_SECRET
+const JWT_SECRET = process.env.JWT_SECRET || 'jwt_secret'; 
 
 router.post('/create-admin', async (req, res) => {
   try {
