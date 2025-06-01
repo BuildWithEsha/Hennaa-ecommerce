@@ -8,7 +8,7 @@ export default function ProductList() {
   }, []);
 
   async function fetchProducts() {
-    const res = await fetch('/api/products');
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/products`);
     const data = await res.json();
     console.log('Fetched products:', data); 
     setProducts(data);
