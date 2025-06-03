@@ -10,25 +10,36 @@ export default function OrderList() {
   }, []);
 
   async function fetchOrders() {
-    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/orders`);
-    const data = await res.json();
-    setOrders(data);
+    try {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/orders`);
+      if (!res.ok) throw new Error('Failed to fetch orders');
+      const data = await res.json();
+      setOrders(data);
+    } catch (error) {
+      console.error('Error fetching orders:', error);
+    }
   }
 
   async function toggleDelivered(id, currentStatus) {
-    const res = await fetch(`/api/orders/${id}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ delivered: !currentStatus }),
-    });
+    try {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/orders/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ delivered: !currentStatus }),
+      });
 
-    if (res.ok) {
-      const updated = await res.json();
-      setOrders((prev) =>
-        prev.map((order) =>
-          order._id === id ? updated : order
-        )
-      );
+      if (res.ok) {
+        const updated = await res.json();
+        setOrders((prev) =>
+          prev.map((order) =>
+            order._id === id ? updated : order
+          )
+        );
+      } else {
+        console.error('Failed to update delivery status');
+      }
+    } catch (error) {
+      console.error('Error updating delivery status:', error);
     }
   }
 
@@ -40,9 +51,22 @@ export default function OrderList() {
     );
   }
 
-  function deleteOrder(id) {
-    setOrders(prev => prev.filter(order => order._id !== id));
-    setExpandedOrderIds(prev => prev.filter(orderId => orderId !== id));
+  // Persistent delete: call backend API to delete, then update frontend state
+  async function deleteOrder(id) {
+    try {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/orders/${id}`, {
+        method: 'DELETE',
+      });
+
+      if (res.ok) {
+        setOrders(prev => prev.filter(order => order._id !== id));
+        setExpandedOrderIds(prev => prev.filter(orderId => orderId !== id));
+      } else {
+        console.error('Failed to delete order');
+      }
+    } catch (error) {
+      console.error('Error deleting order:', error);
+    }
   }
 
   const toBeDelivered = orders.filter((o) => !o.delivered);
